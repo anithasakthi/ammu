@@ -1,0 +1,19 @@
+/** Override Bootstrap */
+.wrapper{
+    
+    width:980px;
+    margin: 0 auto;
+}
+
+#login-form {
+        border: 1px solid #D8D8D8;
+        border-bottom-width: 4px;
+         border-top-width: 2px;
+         background-color: #f2f2f2;
+         max-width: 350px;
+         padding: 19px 29px 29px;
+         margin: 0 auto 20px;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 3px;
+         border-radius: 3px;
+}
