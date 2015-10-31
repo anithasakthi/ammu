@@ -17,3 +17,14 @@
           -moz-border-radius: 3px;
          border-radius: 3px;
 }
+
+#dashboard-side {
+    
+    background: #57a957;
+    min-height: 500px;
+}
+
+#dashboard-main{
+    background: #009999;
+    min-height: 500px;
+}
