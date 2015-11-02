@@ -2,6 +2,7 @@
 
 class User_model extends CI_Model
 {
+//******************************************************************************
 //    function for  $data= $this->user_model->get(3);
     public function get($user_id = null){
         
@@ -16,18 +17,21 @@ class User_model extends CI_Model
         
         return $q->result_array();
     }
+//******************************************************************************
 //    function for $result = $this->user_model->insert(['login' => 'anitha']);
     public function insert($data){
         
         $this->db->insert('user',$data);
         return $this->db->insert_id();
     }
-//   function for     $result = $this->user_model->update(['user_id' => '4'     ],'anitha'); 
+//******************************************************************************
+//function for $result = $this->user_model->update(['user_id' => '4'],'anitha'); 
     public function update($data,$login){
         $this->db->where(['login' => $login]);
         $this->db->update('user',$data);
         return $this->db->affected_rows();
     }
+//******************************************************************************
 //    $result = $this->user_model->delete(5);
     public function delete($user_id){
         
@@ -35,6 +39,6 @@ class User_model extends CI_Model
         return $this->db->affected_rows();
     }
             
-    
+//******************************************************************************    
             
 }

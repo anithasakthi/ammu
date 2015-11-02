@@ -8,7 +8,7 @@
     <script src="<?=base_url()?>public/js/jquery.js"></script>
     <script src="<?=base_url()?>public/js/bootstrap.js"></script>
     
-<img src="<?=base_url()?>public/img/rose_PNG650.png" style="width:304px;height:228px;" align="right">
+<!--<img src="<?=base_url()?>public/img/rose_PNG650.png" style="width:304px;height:228px;" align="right">-->
 </head>
 <body>
         

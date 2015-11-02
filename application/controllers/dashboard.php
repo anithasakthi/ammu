@@ -2,6 +2,7 @@
 
 class dashboard extends CI_Controller
 {
+//******************************************************************************
     public function __construct() {
         parent::__construct();
         
@@ -10,18 +11,19 @@ class dashboard extends CI_Controller
             $this->logout();
         }
     }
-
+//******************************************************************************
     public function index()
     {
         $this->load->view('dashboard/include/header_view');
         $this->load->view('dashboard/dashboard_view');
         $this->load->view('dashboard/include/footer_view');
     }
-    
+//******************************************************************************    
     public function logout()
     {
         $this->session->sess_destroy();
         //session_destroy();
         redirect('/');
     }
+//******************************************************************************
 }

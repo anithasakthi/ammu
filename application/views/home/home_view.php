@@ -1,6 +1,6 @@
 <div class="row-fluid">
 <div class="span12" style="position:absolute; left:10px; top:180px;">
-    <form id="login-form" class="form-singin" method="post" action="<?=site_url('user/login')?>"> 
+    <form id="login-form" class="form-singin" method="post" action="<?=site_url('api/login')?>"> 
         
     <fieldset>
     <div><h5>Please enter your Username and Password below</h5></div>
@@ -21,10 +21,13 @@
     <div class="control-group">
         <div class="controls">
             <input type="submit" value="login" class="btn btn-primary" />
+            <a class="btn btn-success" href="<?=site_url('home/register')?>">Register</a></label>
         </div>
     </div>
     </fieldset>
 </form>
+
+
 </div>
 </div>
 
@@ -37,10 +40,10 @@
       
       $.post(url, postData, function(o){  
         if(o.result == 1){
-              alert ('login okay');
-              window.location.href = 'dashboard';
+//              alert ('login okay');
+              window.location.href = '<?=site_url('dashboard')?>';
           }else {
-              alert('invalid login');
+              alert('Invalid Login');
               
         }
       },'json');
