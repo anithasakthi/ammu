@@ -37,6 +37,10 @@
     min-height: 500px;
 }
 
+.hide{
+    display: none
+}
+
 #dashboard-main{
     background: #009999;
     min-height: 500px;

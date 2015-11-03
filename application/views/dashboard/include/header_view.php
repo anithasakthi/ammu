@@ -7,8 +7,18 @@
     
     <script src="<?=base_url()?>public/js/jquery.js"></script>
     <script src="<?=base_url()?>public/js/bootstrap.js"></script>
+    <script src="<?=base_url()?>public/js/ammuproject/dashboard/result.js"></script>
+    <script src="<?=base_url()?>public/js/ammuproject/dashboard/event.js"></script>
+    <script src="<?=base_url()?>public/js/ammuproject/dashboard/template.js"></script>
+    <script src="<?=base_url()?>public/js/ammuproject/dashboard.js"></script>
     
-<!--<img src="<?=base_url()?>public/img/rose_PNG650.png" style="width:304px;height:228px;" align="right">-->
+    <script>
+    $(function()    {
+    //Init the Dashboard Application    
+        var dashboard = new Dashboard();
+    });
+    </script>
+    
 </head>
 <body>
    
@@ -26,3 +36,5 @@
      <!-- start wrapper -->  
     <div class="wrapper">
         
+        <div  id="error" class="alert alert-error hide"></div>
+        <div  id="success" class="alert alert-success hide"></div>
