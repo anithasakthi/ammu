@@ -45,3 +45,7 @@
     background: #009999;
     min-height: 500px;
 }
+
+.todo_complete{
+    color: #fff;
+}

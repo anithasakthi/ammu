@@ -76,7 +76,33 @@ class Api extends CI_Controller
       $this->output->set_output(json_encode(['result' => 0, 'error' => 'User not created.']));
     
     }
-//******************************************************************************   
+    
+//******************************************************************************    
+    public function get_todo($id = null)
+    {
+        $this->_require_login();
+        
+        if($id != null)
+        {
+            //echo $id;
+            $this->db->where([
+               'todo_id' => $id ,
+               'user_id' => $this->session->userdata('user_id')
+            ]);
+        }else{
+            $this->db->where('user_id', $this->session->userdata('user_id'));
+        }
+        
+        
+        $query = $this->db->get('todo');
+        $result = $query->result();
+        $this->output->set_output(json_encode($result));
+        //print_r($result);
+       
+    }
+    
+//******************************************************************************      
+    
     public function create_todo()
     {
         $this->_require_login();
@@ -96,7 +122,13 @@ class Api extends CI_Controller
            'user_id' => $this->session->userdata('user_id')
         ]);
      if($result)   {
-         $this->output->set_output(json_encode(['result' => 1]));
+         //Get the freshest entry made
+        $query = $this->db->get_where('todo',['todo_id' => $this->db->insert_id()]);
+        
+         $this->output->set_output(json_encode([
+             'result' => 1,
+             'data' =>  $query->result()
+             ]));
          return false;
      }
         $this->output->set_output(json_encode([
@@ -107,20 +139,60 @@ class Api extends CI_Controller
 //******************************************************************************    
     public function update_todo()
     {
+         $this->output->set_content_type('application_json');
         $this->_require_login();
         $todo_id = $this->input->post('todo_id');
+        $completed = $this->input->post('completed');
+
+        $this->db->where(['todo_id' => $todo_id]);
+        $this->db->update('todo',[
+            'completed'=>$completed
+        ]);
+        $result = $this->db->affected_rows();
+        
+        if($result){
+            $this->output->set_output(json_encode(['result' => 1]));
+            return false;
+        }
+        else {
+            $this->output->set_output(json_encode(['result' => 0]));
+            return false;
+        }
+        
     }
 //******************************************************************************    
     public function delete_todo()
     {
         $this->_require_login();
-        $todo_id = $this->input->post('todo_id');
+        
+        $result = $this->db->delete('todo',[
+           'todo_id' => $this->input->post('todo_id'),
+           'user_id' => $this->session->userdata('user_id')
+        ]);
+        
+        if($result){
+            $this->output->set_output(json_encode([
+                'result' => 1
+                ]));
+            return false;
+        }
+        $this->output->set_output(json_encode([
+            'result' => 0,
+            'message' => 'Count not delete'
+            
+        ]));
     }
 //******************************************************************************    
     public function create_note()
     {
         $this->_require_login();
     }
+//******************************************************************************    
+    public function get_note()
+    {
+        $this->_require_login();
+    }    
+    
 //******************************************************************************    
     public function update_note()
     {

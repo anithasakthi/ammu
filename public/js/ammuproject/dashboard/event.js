@@ -28,6 +28,9 @@ var Event = function() {
         
         if(o.result == 1){
             Result.success();
+            var output = Template.todo(o.data[0]);
+            $("#list_todo").append(output);
+            $("#create_todo input[name=content]").val("");// to clear the content after click create    
         }else{
             Result.error(o.error);
         }
@@ -50,11 +53,60 @@ var Event = function() {
 //******************************************************************************
 
 var update_todo = function(){
+    $("body").on('click','.todo_update', function(evt){
+       evt.preventDefault() ;
+       var self = $(this);
+       var url = $(this).attr('href');
+       var postData = {
+           todo_id : $(this).attr('data-id'),
+           completed : $(this).attr('data-completed')
+       };
+       console.log(postData);
+           
+       $.post(url, postData, function(o){
+        if (o.result === 1){
+               //Result.success('Saved');
+               if(postData.completed == 1){
+                   self.parent('div').addClass('todo_complete');
+                   self.html('<i class ="icon-share-alt"></i>');
+                   self.attr('data-completed',0);
+               }else{
+                   self.parent('div').removeClass('todo_complete');
+                   self.html('<i class="icon-ok"></i>');
+                   self.attr('data-completed',1);
+               }
+               
+               
+           }else{
+               Result.error('Could not update');
+           }
+       },'json');
+    });
     
 };
 //******************************************************************************
 
 var delete_todo = function(){
+    $("body").on('click','.todo_delete', function(evt){
+       evt.preventDefault() ;
+       
+       var self = $(this).parent('div');
+       var url = $(this).attr('href');
+       var postData = {
+          'todo_id' : $(this).attr('data-id')
+       };
+        $.post(url, postData, function(o){
+           
+            if (o.result === 1){
+               Result.success('Item Deleted successfully');
+               
+               
+               self.remove();
+            }else{
+                Result.error(o.msg);
+            }
+        },'json');
+    });
     
 };
 //******************************************************************************
